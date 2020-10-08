@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1602114422923.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B1A94CB2",
+    "lastKnownWriteTime" : 1602114635,
+    "last_content_update" : 1602114635996,
+    "path" : "C:/Users/ak/git/website/content/post/2020-10-07-first.en-us.Rmd",
+    "project_path" : "content/post/2020-10-07-first.en-us.Rmd",
+    "properties" : {
+        "cursorPosition" : "19,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

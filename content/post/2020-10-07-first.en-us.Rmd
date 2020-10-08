@@ -1,0 +1,19 @@
+---
+title: Learning Python
+author: Andre
+date: '2020-10-07'
+slug: first.en-us
+categories: [knawledge]
+tags: [python]
+keywords:
+  - tech
+comments: no
+showMeta: no
+showActions: yes
+---
+
+Working through beginner's python book with friends, I will use this space to note progress on exercises and projects
+
+
+# Ch.8 - Functions
+
