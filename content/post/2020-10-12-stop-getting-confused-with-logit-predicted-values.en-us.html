@@ -1,0 +1,71 @@
+---
+title: Simple logit reminder
+author: Andre
+date: '2020-10-12'
+slug: stop-getting-confused-with-logit-predicted-values.en-us
+categories:
+  - biostat
+tags:
+  - biostat
+  - noob
+keywords:
+  - tech
+thumbnailImage: 'https://res.cloudinary.com/dcz7u1hn0/image/upload/v1602539250/Futurama-Fry_xjrd9x.jpg'
+thumbnailImagePosition: left
+---
+
+
+
+<p>Logistic regression ORs and predicted values, come onn</p>
+<!--more-->
+<p>This really basic concept ALWAYS confuses me, and it’s got to stop once and for all plzz.</p>
+<p>Suppose the following logistic regression model (from UCLA biostats website):</p>
+<pre class="r"><code>mydata &lt;- read.csv(&quot;https://stats.idre.ucla.edu/stat/data/binary.csv&quot;)
+model &lt;- glm(formula = admit ~ gre + gpa + rank, data=mydata, family=binomial)
+summary(model)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = admit ~ gre + gpa + rank, family = binomial, data = mydata)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.5802  -0.8848  -0.6382   1.1575   2.1732  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -3.449548   1.132846  -3.045  0.00233 ** 
+## gre          0.002294   0.001092   2.101  0.03564 *  
+## gpa          0.777014   0.327484   2.373  0.01766 *  
+## rank        -0.560031   0.127137  -4.405 1.06e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 499.98  on 399  degrees of freedom
+## Residual deviance: 459.44  on 396  degrees of freedom
+## AIC: 467.44
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>And the following odds ratios:</p>
+<pre class="r"><code>exp(coef(model))</code></pre>
+<pre><code>## (Intercept)         gre         gpa        rank 
+##  0.03175998  1.00229659  2.17496718  0.57119114</code></pre>
+<p>For GPA (for instance), a one unit increase in GPA (e.g. from 2.0 to 3.0) is associated with 217% increase in odds of admission to a university. This assumes other variables are held at a constant value (mean).</p>
+<p>NOW - suppose you calculate predicted log-odds for a set of data values - GPA 2 vs 3, all other variables held at their means:</p>
+<pre class="r"><code>values &lt;- data.frame(gre = rep(mean(mydata$gre), 2), 
+                     gpa = c(2,3), 
+                     rank = rep(mean(mydata$rank, 2)))
+
+predict(model, values, type = &#39;link&#39;)</code></pre>
+<pre><code>##          1          2 
+## -1.6674240 -0.8904104</code></pre>
+<p>The numbers above correspond to the predicted log-odds of GPA 2.0 vs 3.0, all else being equal. If we exponentiate, you calculate odds:</p>
+<pre class="r"><code>exp(predict(model, values, type = &#39;link&#39;))</code></pre>
+<pre><code>##         1         2 
+## 0.1887326 0.4104872</code></pre>
+<p>And finally, you can take the ratio of the odds to get …. the odds-ratio:</p>
+<pre class="r"><code>0.4104872 / 0.1887326</code></pre>
+<pre><code>## [1] 2.174967</code></pre>
+<p>What always confuses me is the prediction of log-odds using <code>predict</code> vs being to calculate odds ratios directly by exponentiating the linear combination of parameters. I think my short circuit is often thinking that exponentiating the predicted log-odds means you get odds ratios for the combination of parameters. That’s not the case, since it’s NOT A RATIO.</p>
+<p>ok</p>

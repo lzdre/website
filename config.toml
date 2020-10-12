@@ -32,7 +32,7 @@ canonifyurls = true
 
 [author]
   name = "Andre E. Kim"
-  bio = "Epidemiology/Data analysis, but writing about anything that interests me"
+  bio = "Epidemiology/Data analysis, but writing about anything that interests me. Life's too short .. "
   job = ""
   location = "Los Angeles"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog

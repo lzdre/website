@@ -1,0 +1,62 @@
+---
+title: Simple logit reminder
+author: Andre
+date: '2020-10-12'
+slug: stop-getting-confused-with-logit-predicted-values.en-us
+categories:
+  - biostat
+tags:
+  - biostat
+  - noob
+keywords:
+  - tech
+thumbnailImage: 'https://res.cloudinary.com/dcz7u1hn0/image/upload/v1602539250/Futurama-Fry_xjrd9x.jpg'
+thumbnailImagePosition: left
+---
+
+Logistic regression ORs and predicted values, come onn  
+
+<!--more-->
+
+This really basic concept ALWAYS confuses me, and it's got to stop once and for all plzz. 
+
+Suppose the following logistic regression model (from UCLA biostats website): 
+```{r}
+mydata <- read.csv("https://stats.idre.ucla.edu/stat/data/binary.csv")
+model <- glm(formula = admit ~ gre + gpa + rank, data=mydata, family=binomial)
+summary(model)
+```
+And the following odds ratios:
+```{r}
+exp(coef(model))
+```
+
+For GPA (for instance), a one unit increase in GPA (e.g. from 2.0 to 3.0) is associated with 217% increase in odds of admission to a university. This assumes other variables are held at a constant value (mean). 
+
+NOW - suppose you calculate predicted log-odds for a set of data values - GPA 2 vs 3, all other variables held at their means:
+```{r}
+
+values <- data.frame(gre = rep(mean(mydata$gre), 2), 
+                     gpa = c(2,3), 
+                     rank = rep(mean(mydata$rank, 2)))
+
+predict(model, values, type = 'link')
+
+```
+
+The numbers above correspond to the predicted log-odds of GPA 2.0 vs 3.0, all else being equal. If we exponentiate, you calculate odds:
+
+```{r}
+
+exp(predict(model, values, type = 'link'))
+```
+
+And finally, you can take the ratio of the odds to get .... the odds-ratio:
+```{r}
+0.4104872 / 0.1887326
+```
+
+
+What always confuses me is the prediction of log-odds using `predict` vs being to calculate odds ratios directly by exponentiating the linear combination of parameters. I think my short circuit is often thinking that exponentiating the predicted log-odds means you get odds ratios for the combination of parameters. That's not the case, since it's NOT A RATIO. 
+
+ok 

@@ -8,11 +8,13 @@ tags:
   - hobbies
 keywords:
   - tech
+comments: no
+showMeta: no
+showActions: yes
 thumbnailImage: 'https://res.cloudinary.com/dcz7u1hn0/image/upload/v1602190951/Screen_Shot_2020-10-06_at_4.19.27_PM_qyeqpj.png'
 thumbnailImagePosition: left
+summary: "The key to success is avoiding giving into your fears and **not** slowing down right before going over the edge."
 ---
-
-The key to success is avoiding giving into your fears and **not** slowing down right before going over the edge.  
 
 <!--more-->
 
