@@ -1,0 +1,65 @@
+---
+title: Rosalind challenge
+author: 'Andre'
+date: '2020-10-13'
+slug: rosalind-challenge.en-us
+categories:
+  - knawledge
+tags:
+  - genomics
+keywords:
+  - tech
+thumbnailImage: 'https://res.cloudinary.com/dcz7u1hn0/image/upload/v1602627418/Genes-Alive_kyztho.jpg'
+thumbnailImagePosition: left
+---
+
+How many problems can I get through in the long term, before my motivation falls by the wayside?  
+
+Working through them from easiest to hardest.  
+
+<!--more-->
+
+# Counting DNA Nucleotides 
+
+Count occurrences of each nucleotide in a DNA strand. This was straightforward, just counting occurrences of specific strings (A,C,G,T). Nothing fancy on my end: 
+
+```{r, eval = F}
+x <- read.table("data")
+A <- lengths(regmatches(x, gregexpr("A", x)))
+# and so on. Incidentally, I never NOT have to google regex
+```
+
+
+# Transcribing DNA into RNA 
+
+Turn DNA strand into RNA (substitute 'T' for 'U'): 
+
+```{r, eval = F}
+out <- gsub("T", "U", DNA)
+```
+
+
+# Complementing a Strand of DNA
+
+Turn *AAAACCCGGT* into *ACCGGGTTTT* (reverse complement).  
+Approach was to separate DNA into list, get complement, `do.call` into a vector, and use `rev()`. 
+
+```{r, eval = F}
+x <- read.table("data")
+
+y <- strsplit(x, "")
+
+# gross
+complement <- function(x) {
+  ifelse(x == "A", "T",
+  ifelse(x == "T", "A", 
+  ifelse(x == "G", "C", 
+         "G")))
+}
+
+z <- do.call(c, lapply(y, complement))
+
+paste0(rev(z), collapse = "")
+
+```
+

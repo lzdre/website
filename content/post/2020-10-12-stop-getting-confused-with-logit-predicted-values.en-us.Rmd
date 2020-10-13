@@ -1,5 +1,5 @@
 ---
-title: Simple logit reminder
+title: Simple logit reminder for myself
 author: Andre
 date: '2020-10-12'
 slug: stop-getting-confused-with-logit-predicted-values.en-us
@@ -31,7 +31,7 @@ And the following odds ratios:
 exp(coef(model))
 ```
 
-For GPA (for instance), a one unit increase in GPA (e.g. from 2.0 to 3.0) is associated with 217% increase in odds of admission to a university. This assumes other variables are held at a constant value (mean). 
+For GPA (for instance), a one unit increase in GPA, e.g. from 2.0 to 3.0, makes you more than twice as likely to be admitted to a university. This assumes other variables are held at a constant value (mean).  
 
 NOW - suppose you calculate predicted log-odds for a set of data values - GPA 2 vs 3, all other variables held at their means:
 ```{r}
@@ -57,6 +57,6 @@ And finally, you can take the ratio of the odds to get .... the odds-ratio:
 ```
 
 
-What always confuses me is the prediction of log-odds using `predict` vs being to calculate odds ratios directly by exponentiating the linear combination of parameters. I think my short circuit is often thinking that exponentiating the predicted log-odds means you get odds ratios for the combination of parameters. That's not the case, since it's NOT A RATIO. 
+What always confuses me is the prediction of log-odds using `predict` vs being to calculate odds ratios directly by exponentiating the linear combination of parameters. I think my short circuit is often thinking that exponentiating the predicted log-odds means you get odds ratios for the combination of parameters. That's not the case, since it's NOT A RATIO.. 
 
 ok 

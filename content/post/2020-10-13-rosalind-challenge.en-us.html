@@ -1,0 +1,52 @@
+---
+title: Rosalind challenge
+author: 'Andre'
+date: '2020-10-13'
+slug: rosalind-challenge.en-us
+categories:
+  - knawledge
+tags:
+  - genomics
+keywords:
+  - tech
+thumbnailImage: 'https://res.cloudinary.com/dcz7u1hn0/image/upload/v1602627418/Genes-Alive_kyztho.jpg'
+thumbnailImagePosition: left
+---
+
+
+
+<p>How many problems can I get through in the long term, before my motivation falls by the wayside?</p>
+<p>Working through them from easiest to hardest.</p>
+<!--more-->
+<div id="counting-dna-nucleotides" class="section level1">
+<h1>Counting DNA Nucleotides</h1>
+<p>Count occurrences of each nucleotide in a DNA strand. This was straightforward, just counting occurrences of specific strings (A,C,G,T). Nothing fancy on my end:</p>
+<pre class="r"><code>x &lt;- read.table(&quot;data&quot;)
+A &lt;- lengths(regmatches(x, gregexpr(&quot;A&quot;, x)))
+# and so on. Incidentally, I never NOT have to google regex</code></pre>
+</div>
+<div id="transcribing-dna-into-rna" class="section level1">
+<h1>Transcribing DNA into RNA</h1>
+<p>Turn DNA strand into RNA (substitute ‘T’ for ‘U’):</p>
+<pre class="r"><code>out &lt;- gsub(&quot;T&quot;, &quot;U&quot;, DNA)</code></pre>
+</div>
+<div id="complementing-a-strand-of-dna" class="section level1">
+<h1>Complementing a Strand of DNA</h1>
+<p>Turn <em>AAAACCCGGT</em> into <em>ACCGGGTTTT</em> (reverse complement).<br />
+Approach was to separate DNA into list, get complement, <code>do.call</code> into a vector, and use <code>rev()</code>.</p>
+<pre class="r"><code>x &lt;- read.table(&quot;data&quot;)
+
+y &lt;- strsplit(x, &quot;&quot;)
+
+# gross
+complement &lt;- function(x) {
+  ifelse(x == &quot;A&quot;, &quot;T&quot;,
+  ifelse(x == &quot;T&quot;, &quot;A&quot;, 
+  ifelse(x == &quot;G&quot;, &quot;C&quot;, 
+         &quot;G&quot;)))
+}
+
+z &lt;- do.call(c, lapply(y, complement))
+
+paste0(rev(z), collapse = &quot;&quot;)</code></pre>
+</div>
